@@ -4,10 +4,11 @@ import './index.css';
 import AddContact from './AddContact';
 import * as serviceWorker from './serviceWorker';
 import ShowContacts from './ShowContacts';
+import PhoneBook from './PhoneBook';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ShowContacts />
+    <PhoneBook />
   </React.StrictMode>,
   document.getElementById('root')
 );
