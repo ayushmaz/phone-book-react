@@ -16,6 +16,11 @@ class ShowContacts extends Component {
         this.setState(state)
         console.log(this.state)
     }
+
+    onDeletedClick = contactID => {
+        this.props.deleteSuscriberHandler(contactID)
+    }
+    
     render() {
         let searchedContacts = this.props.subscriberList.filter(contact => contact.name.indexOf(this.state.query) !== -1 )
         return (
@@ -23,22 +28,22 @@ class ShowContacts extends Component {
                 <Header header={"Phone Book"}></Header>
                 <div className="container" style={{ marginTop: '30px' }}>
                     <input className="form-control" type="text"  placeholder="Search" name = "query"onChange={this.updateSearch.bind(this)} style={{ padding: '25px', fontSize: '1.15rem', marginBottom: '20px' }} />
-                    <div class="accordion" id="accordionExample">
+                    <div className="accordion" id="accordionExample">
                         {searchedContacts.map(sub => {
                             console.log(sub)
                             return <div className="card" key = {sub.id}>
                                 <div className="card-header" id="headingOne">
                                     <h2 className="mb-0">
-                                        <button className="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target={`#collapse${sub.id}`} aria-expanded="false" aria-controls={`collapse${sub.id}`}>
+                                        <button className="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target={`#collapse${sub.id}`} aria-expanded="false" aria-controls={`collapse${sub.id}`}>
                                             <div className="row" >
                                                 <div className="col-11" style={{ alignSelf: 'center' }}><h5>{sub.name}</h5></div>
-                                                <div className="col-1"><button type="button" class="btn btn-danger">Delete</button></div>
+                                                <div className="col-1"><button type="button" className="btn btn-danger" onClick={this.onDeletedClick.bind(this, (sub.id))}>Delete</button></div>
                                             </div>
                                         </button>
                                     </h2>
                                 </div>
 
-                                <div id={`collapse${sub.id}`} class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                <div id={`collapse${sub.id}`} className="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                                     <div className="card-body">
                                         <h6>DOB:- {sub.dob}</h6>
                                         <div className="row">
@@ -54,7 +59,7 @@ class ShowContacts extends Component {
                             </div>
                         })}
                     </div>
-                    <Link to="/add"><button type="button" class="btn btn-success" style={{ marginTop: '20px' }}>Add</button></Link>
+                    <Link to="/add"><button type="button" className="btn btn-success" style={{ marginTop: '20px' }}>Add</button></Link>
                 </div>
             </div>
         );

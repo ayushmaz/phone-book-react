@@ -25,7 +25,7 @@ class PhoneBook extends Component {
         let subscribersList = this.state.subscriberList
         let subscriberIndex = 0
         subscribersList.forEach(function(subscriber , index){
-            if(subscriber.id == id){
+            if(subscriber.id === id){
                 subscriberIndex = index
             }
         } , this)
