@@ -3,14 +3,28 @@ import Header from './Header';
 import { Link } from 'react-router-dom'
 
 class ShowContacts extends Component {
+    constructor(){
+        super();
+        this.state={
+            query : ''
+        }
+    }
+
+    updateSearch(e){
+        const state = this.state;
+        state[e.target.name] = e.target.value.substr(0,20);
+        this.setState(state)
+        console.log(this.state)
+    }
     render() {
+        let searchedContacts = this.props.subscriberList.filter(contact => contact.name.indexOf(this.state.query) !== -1 )
         return (
             <div>
                 <Header header={"Phone Book"}></Header>
                 <div className="container" style={{ marginTop: '30px' }}>
-                    <input class="form-control" type="text" placeholder="Search" aria-label="Search" style={{ padding: '25px', fontSize: '1.15rem', marginBottom: '20px' }} />
+                    <input className="form-control" type="text"  placeholder="Search" name = "query"onChange={this.updateSearch.bind(this)} style={{ padding: '25px', fontSize: '1.15rem', marginBottom: '20px' }} />
                     <div class="accordion" id="accordionExample">
-                        {this.props.subscriberList.map(sub => {
+                        {searchedContacts.map(sub => {
                             console.log(sub)
                             return <div className="card" key = {sub.id}>
                                 <div className="card-header" id="headingOne">
