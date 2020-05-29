@@ -24,7 +24,7 @@ class AddContact extends Component {
 
   onFormSubmitted = async (e) => {
     e.preventDefault()
-    this.props.addSuscriberHandler(this.state)
+    //this.props.addSuscriberHandler(this.state)
     this.setState({ id: 0, name: '', phone: '' , dob: '' , email: '' })
     const state = this.state
     state[e.target.name] = e.target.value;
@@ -34,6 +34,7 @@ class AddContact extends Component {
         headers: {"Content-Type" : "application/json"},
         body : JSON.stringify(state)
       })
+      this.props.getContacts()
       console.log(response)
     } catch (error) {
       console.error(error.message);

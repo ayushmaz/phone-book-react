@@ -6,10 +6,11 @@ class ShowContacts extends Component {
     constructor(){
         super();
         this.state={
-            query : ''
-        }
+            query : '',
+        };
+        
     }
-
+    
     updateSearch(e){
         const state = this.state;
         state[e.target.name] = e.target.value.substr(0,20);
@@ -18,11 +19,11 @@ class ShowContacts extends Component {
     }
 
     onDeletedClick = contactID => {
-        this.props.deleteSuscriberHandler(contactID)
+        //this.props.deleteSuscriberHandler(contactID)
     }
     
     render() {
-        let searchedContacts = this.props.subscriberList.filter(contact => contact.name.indexOf(this.state.query) !== -1 )
+        let searchedContacts = this.props.contactsList.filter(contact => contact.name.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1 )
         return (
             <div>
                 <Header header={"Phone Book"}></Header>
