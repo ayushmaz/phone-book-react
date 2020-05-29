@@ -12,47 +12,37 @@ class PhoneBook extends Component {
     }
 
     componentDidMount(){
+        console.log("component")
         this.getContacts();
     }
     getContacts = async () => {
         try {
             const response = await fetch("http://localhost:5000/contacts");
             const jsonData = await response.json();
-            console.log(jsonData);
             this.setState({ contactsList: jsonData })
+            //console.log(this.state)
         } catch (error) {
             console.error(error.message)
         }
     }
-    // addSuscriberHandler = (newSuscriber) => {
-    //     let subscribersList = this.state.subscriberList;
-    //     if (subscribersList.length > 0) {
-    //         newSuscriber.id = subscribersList[subscribersList.length - 1].id + 1;
-    //     } else {
-    //         newSuscriber.id = 1;
-    //     }
-    //     subscribersList.push(newSuscriber)
-    //     this.setState({ subscriberList: subscribersList })
-    //     //console.log(this.state.subscriberList)
-    // }
-    deleteSuscriberHandler = (id) => {
-        let subscribersList = this.state.subscriberList
-        let subscriberIndex = 0
-        subscribersList.forEach(function (subscriber, index) {
-            if (subscriber.id === id) {
-                subscriberIndex = index
-            }
-        }, this)
 
-        subscribersList.splice(subscriberIndex, 1)
-        this.setState({ subscriberList: subscribersList })
+
+    deleteContact = async(id) => {
+        try {
+            this.setState({contactsList : this.state.contactsList.filter(contact => contact.id !== id)});
+            const response = await fetch(`http://localhost:5000/contacts/${id}`,{method:"DELETE"});
+            
+            
+        } catch (error) {
+            console.error(error.message)
+        }
     }
     render() {
         return (
             <div>
                 <Router>
                     <div className="main-container">
-                        <Route exact path='/' render={(props) => <ShowContacts {...props} contactsList={this.state.contactsList} deleteSuscriberHandler={this.deleteSuscriberHandler} />} />
+                        <Route exact path='/' render={(props) => <ShowContacts {...props} getContacts={this.getContacts} contactsList={this.state.contactsList} deleteContact={this.deleteContact} />} />
                         <Route exact path='/add' render={({ history }, props) => <AddContact history={history} {...props} getContacts={this.getContacts} />} />
                     </div>
                 </Router>

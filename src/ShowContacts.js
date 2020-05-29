@@ -19,7 +19,7 @@ class ShowContacts extends Component {
     }
 
     onDeletedClick = contactID => {
-        //this.props.deleteSuscriberHandler(contactID)
+        this.props.deleteContact(contactID)
     }
     
     render() {
