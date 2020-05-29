@@ -21,6 +21,7 @@ class ShowContacts extends Component {
     onDeletedClick = contactID => {
         this.props.deleteContact(contactID)
     }
+
     
     render() {
         let searchedContacts = this.props.contactsList.filter(contact => contact.name.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1 )
@@ -34,21 +35,21 @@ class ShowContacts extends Component {
                             return <div className="card" key = {sub.id}>
                                 <div className="card-header" id="headingOne">
                                     <h2 className="mb-0">
-                                        <button className="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target={`#collapse${sub.id}`} aria-expanded="false" aria-controls={`collapse${sub.id}`}>
+                                        <div className="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target={`#collapse${sub.id}`} aria-expanded="false" aria-controls={`collapse${sub.id}`}>
                                             <div className="row" >
                                                 <div className="col-11" style={{ alignSelf: 'center' }}><h5>{sub.name}</h5></div>
                                                 <div className="col-1"><button type="button" className="btn btn-danger" onClick={this.onDeletedClick.bind(this, (sub.id))}>Delete</button></div>
                                             </div>
-                                        </button>
+                                        </div>
                                     </h2>
                                 </div>
 
                                 <div id={`collapse${sub.id}`} className="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                                     <div className="card-body">
-                                        <h6>DOB:- {sub.dob}</h6>
+                                        <h6>DOB:- {sub.dob.substr(0,10)}</h6>
                                         <div className="row">
-                                            <div className="col-6">Mobile Number</div>
-                                            <div className="col-6">Email</div>
+                                            <div className="col-6"><h6>Mobile Number</h6></div>
+                                            <div className="col-6"><h6>Email</h6></div>
                                         </div>
                                         <div className="row">
                                             <div className="col-6">{sub.phone}</div>
