@@ -22,24 +22,10 @@ class AddContact extends Component {
     this.setState(state)
   }
 
-  onFormSubmitted = async (e) => {
+  onFormSubmitted = (e) => {
     e.preventDefault()
-    // this.props.addSuscriberHandler(this.state)
-    // this.setState({ id: 0, name: '', phone: '' , dob: '' , email: '' })
-    try {
-      const state = this.state;
-      state[e.target.name] = e.target.value;
-      const body = state
-      const response = await fetch("http://localhost:5000/contacts",{
-        method : "POST",
-        headers: {"Content-Type" : "application/json"},
-        body : JSON.stringify(body)
-      })
-      //console.log(response);
-    } catch (err) {
-      console.error(err.message)
-    }
-    //window.location = "/"
+    this.props.addSuscriberHandler(this.state)
+    this.setState({ id: 0, name: '', phone: '' , dob: '' , email: '' })
     this.props.history.push('/')
   }
   render() {
@@ -55,7 +41,7 @@ class AddContact extends Component {
               </div>
               <div className="form-group">
                 <label htmlFor="dob">DOB</label>
-                <input type="date" value="2012-11-08" placeholder= "YYYY-MM-DD"  className="form-control" name="dob" id="dob" onChange={this.inputChangedHandler}/>
+                <input type="date" className="form-control" name="dob" id="dob" onChange={this.inputChangedHandler}/>
               </div>
               <div className="form-group">
                 <label htmlFor="mobile-number">Mobile Number</label>
