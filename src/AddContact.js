@@ -22,10 +22,22 @@ class AddContact extends Component {
     this.setState(state)
   }
 
-  onFormSubmitted = (e) => {
+  onFormSubmitted = async (e) => {
     e.preventDefault()
     this.props.addSuscriberHandler(this.state)
     this.setState({ id: 0, name: '', phone: '' , dob: '' , email: '' })
+    const state = this.state
+    state[e.target.name] = e.target.value;
+    try {
+      const response = await fetch("http://localhost:5000/contacts",{
+        method :"POST",
+        headers: {"Content-Type" : "application/json"},
+        body : JSON.stringify(state)
+      })
+      console.log(response)
+    } catch (error) {
+      console.error(error.message);
+    }
     this.props.history.push('/')
   }
   render() {

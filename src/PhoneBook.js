@@ -19,7 +19,7 @@ class PhoneBook extends Component {
         }
         subscribersList.push(newSuscriber)
         this.setState({ subscriberList: subscribersList })
-        console.log(this.state.subscriberList)
+        //console.log(this.state.subscriberList)
     }
     deleteSuscriberHandler = (id) => {
         let subscribersList = this.state.subscriberList
