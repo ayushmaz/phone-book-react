@@ -16,6 +16,7 @@ class PhoneBook extends Component {
     }
     getContacts = async () => {
         try {
+            console.log("Running1")
             const response = await fetch("http://localhost:5000/contacts");
             const jsonData = await response.json();
             console.log(jsonData);
@@ -24,29 +25,19 @@ class PhoneBook extends Component {
             console.error(error.message)
         }
     }
-    // addSuscriberHandler = (newSuscriber) => {
-    //     let subscribersList = this.state.subscriberList;
-    //     if (subscribersList.length > 0) {
-    //         newSuscriber.id = subscribersList[subscribersList.length - 1].id + 1;
-    //     } else {
-    //         newSuscriber.id = 1;
-    //     }
-    //     subscribersList.push(newSuscriber)
-    //     this.setState({ subscriberList: subscribersList })
-    //     //console.log(this.state.subscriberList)
-    // }
-    deleteSuscriberHandler = (id) => {
-        let subscribersList = this.state.subscriberList
-        let subscriberIndex = 0
-        subscribersList.forEach(function (subscriber, index) {
-            if (subscriber.id === id) {
-                subscriberIndex = index
-            }
-        }, this)
+    
+    // deleteSuscriberHandler = (id) => {
+    //     let subscribersList = this.state.subscriberList
+    //     let subscriberIndex = 0
+    //     subscribersList.forEach(function (subscriber, index) {
+    //         if (subscriber.id === id) {
+    //             subscriberIndex = index
+    //         }
+    //     }, this)
 
-        subscribersList.splice(subscriberIndex, 1)
-        this.setState({ subscriberList: subscribersList })
-    }
+    //     subscribersList.splice(subscriberIndex, 1)
+    //     this.setState({ subscriberList: subscribersList })
+    // }
     render() {
         return (
             <div>
