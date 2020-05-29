@@ -8,7 +8,6 @@ class AddContact extends Component {
   constructor() {
     super();
     this.state = {
-      id: 0,
       name: '',
       dob: '',
       phone: '',
@@ -25,7 +24,7 @@ class AddContact extends Component {
   onFormSubmitted = async (e) => {
     e.preventDefault()
     //this.props.addSuscriberHandler(this.state)
-    this.setState({ id: 0, name: '', phone: '' , dob: '' , email: '' })
+    this.setState({  name: '', phone: '' , dob: '' , email: '' })
     const state = this.state
     state[e.target.name] = e.target.value;
     try {
