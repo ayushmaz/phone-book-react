@@ -14,7 +14,6 @@ class ShowContacts extends Component {
         const state = this.state;
         state[e.target.name] = e.target.value.substr(0,20);
         this.setState(state)
-        console.log(this.state)
     }
 
     onDeletedClick = contactID => {
@@ -22,7 +21,7 @@ class ShowContacts extends Component {
     }
     
     render() {
-        let searchedContacts = this.props.subscriberList.filter(contact => contact.name.indexOf(this.state.query) !== -1 )
+        let searchedContacts = this.props.contactList.filter(contact => contact.name.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1 )
         return (
             <div>
                 <Header header={"Phone Book"}></Header>
@@ -30,7 +29,6 @@ class ShowContacts extends Component {
                     <input className="form-control" type="text"  placeholder="Search" name = "query"onChange={this.updateSearch.bind(this)} style={{ padding: '25px', fontSize: '1.15rem', marginBottom: '20px' }} />
                     <div className="accordion" id="accordionExample">
                         {searchedContacts.map(sub => {
-                            console.log(sub)
                             return <div className="card" key = {sub.id}>
                                 <div className="card-header" id="headingOne">
                                     <h2 className="mb-0">
